@@ -1,35 +1,45 @@
-<div class="row">
-    <form class="col s12" [formGroup]="loginForm" (ngSubmit)="loginOnApplication()">
-        <div class="row">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="email" formControlName="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="password" type="password" formControlName="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
-            </div>
-        </div>
-        <div class="row center-align">
-            <button type="submit" [disabled]="!loginForm.valid"
-                class="waves-effect waves-light btn login-button">Entrar</button>
-            <button class="waves-effect waves-light btn">Esqueci Minha Senha!</button>
-        </div>
+<div class="container center-align">
+    <div class="row logo">
 
-    </form>
-</div>
-<div class="row container center-align">
-    <a class="waves-effect waves-light btn-large  teal darken-4 modal-trigger" href="#new-user-modal">Criar nova
-        conta</a>
-</div>
-
-<div id="new-user-modal" class="modal">
-    <div class="modal-content">
-        <app-new-user (onSignupError)="displaySignupError($event)"></app-new-user>
+        <h2>FIND NEW PLACES</h2>
 
     </div>
-    <div class="modal-footer">
+    <div class="row form-content">
+        <form class="col s12" [formGroup]="loginForm" (ngSubmit)="loginOnApplication()">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="login-email" type="email" formControlName="email" class="validate">
+                        <label for="login-email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="login-password" type="password" formControlName="password" class="validate">
+                        <label for="login-password">Password</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button type="submit" [disabled]="!loginForm.valid"
+                    class="waves-effect waves-light btn-large login-button">Entrar</button>
+
+                <a class="waves-effect waves-light btn-large  teal darken-4 modal-trigger" href="#new-user-modal">Criar
+                    nova
+                    conta</a>
+            </div>
+
+        </form>
+    </div>
+    <div class="row container center-align form-content">
+
+    </div>
+
+    <div id="new-user-modal" class="modal">
+        <div class="modal-content">
+            <app-new-user (onSuccessFullRegistration)="goToUserProfile($event)"
+                (onSignupError)="displaySignupError($event)"></app-new-user>
+
+        </div>
+        <div class="modal-footer">
+        </div>
     </div>
 </div>

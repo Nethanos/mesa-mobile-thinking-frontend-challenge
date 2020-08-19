@@ -1,0 +1,41 @@
+<div class="row container">
+    <div class="header left-align">
+        <h4>Criar nova conta</h4>
+    </div>
+
+    <div class="row">
+        <form class="col s12" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="user-name" type="text" formControlName="userName" class="validate">
+                    <label for="user-name">Nome de usuário</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" type="email" formControlName="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" formControlName="password" class="validate">
+                    <label for="password">Senha</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password-checker" type="password" class="validate">
+                    <label for="password-checker">Por favor, repita a senha!</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <button type="submit" class="btn-large btn-waves">Criar minha conta</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

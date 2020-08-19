@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './pages/home/home.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ApiErrorInterceptor } from './interceptors/api-error.interceptor';
-import { AgmCoreModule } from '@agm/core';
 
 
 import { ToastrModule } from 'ngx-toastr';
@@ -32,12 +30,6 @@ import { ToastrModule } from 'ngx-toastr';
     ),
   ],
   providers: [
-
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiErrorInterceptor,
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })

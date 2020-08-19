@@ -14,11 +14,12 @@ export class NewUserComponent implements OnInit {
 
   @Output() onSignupError = new EventEmitter<string>();
 
+  @Output() onSuccessFullRegistration = new EventEmitter<any>();
+
 
   signUpForm = new FormGroup(
     {
 
-      userName: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl('')
     }
@@ -31,7 +32,11 @@ export class NewUserComponent implements OnInit {
   signUp() {
     const newUser = { ...this.signUpForm.value } as User;
 
-    this.authService.signUp(newUser).subscribe((response) => { console.log(response) },
+    this.authService.signUp(newUser).subscribe((response) => {
+      if (response.id) {
+        this.onSuccessFullRegistration.emit(response.id);
+      }
+    },
       (error) => {
         console.error(error);
         this.onSignupError.emit("Houve um problema com seu registro, por favor, verifique seus dados!");

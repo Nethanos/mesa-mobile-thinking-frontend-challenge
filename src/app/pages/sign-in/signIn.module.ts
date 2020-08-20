@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserModule } from './../user/user.module';
-import { HomeComponent } from './home.component';
+import { UserModule } from '../user/user.module';
+import { SignInComponent } from './signIn.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastContainerModule } from 'ngx-toastr';
 
@@ -10,7 +10,7 @@ import { ToastContainerModule } from 'ngx-toastr';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [SignInComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,4 +21,4 @@ import { ToastContainerModule } from 'ngx-toastr';
 
   ]
 })
-export class HomeModule { }
+export class SignInModule { }

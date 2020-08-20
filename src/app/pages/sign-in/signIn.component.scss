@@ -1,0 +1,36 @@
+.login-button {
+    margin-right: 10%;
+}
+
+
+.card {
+    padding: 6%;
+    background: red;
+
+
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-form {
+    width: 60%;
+    min-height: 60%;
+    background: white;
+}
+
+
+.form-content {
+    width: 80vh;
+    color: blue;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .login-button {
+        margin-bottom: 10%;
+    }
+  }

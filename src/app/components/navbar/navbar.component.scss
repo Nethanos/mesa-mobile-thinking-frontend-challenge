@@ -1,0 +1,19 @@
+.profile-icon {
+    font-size: 3rem;
+}
+
+.navbar {
+width: 100%;
+}
+
+.brand-text {
+    margin-left: 5%;
+    font-size: 1.6rem;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .brand-text {
+        margin-left: 0px
+    }
+  }

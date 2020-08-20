@@ -1,10 +1,37 @@
 <agm-map #map (mapReady)="mapLoaded($event)" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
     <agm-marker [latitude]="lat" [longitude]="lng">
-        <agm-info-window><button class="btn">batata</button></agm-info-window>
-
     </agm-marker>
 </agm-map>
 
+
+<div class="nearby-places">
+    <div>
+        <div class="center-align">
+            <header>
+                <h3>Nearby places</h3>
+            </header>
+        </div>
+        <div *ngFor="let place of nearbyPlaceList" class="container left-align place">
+            <div class="col s12">
+                <span>
+                    <img class="place-icon" [src]="place.icon" alt="icon">
+                    <label class="place-label">{{place.name}}</label>
+                    <app-rating></app-rating>
+                </span>
+            </div>
+            <div class="col s12">
+                <label class="vicinity-label">{{place.vicinity}}</label>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- <h3>Lugares próximos a você!</h3>
 <p *ngFor="let place of nearbyPlaceList">
-    {{place.name}} - <img [src]="place.icon">
-</p>
+    <label><img class="place-icon" [src]="place.icon"> {{place.name}}</label>
+</p> -->

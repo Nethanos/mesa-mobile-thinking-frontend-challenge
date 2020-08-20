@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     height: 100vh;
+    max-width:100%;
     display: flex;
+    font-size: 60%;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #6C4FBB;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 

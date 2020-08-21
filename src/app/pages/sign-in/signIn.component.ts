@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import * as M from 'materialize-css';
 import { Router } from '@angular/router';
+import { Modal } from 'materialize-css';
 @Component({
   selector: 'app-signIn',
   templateUrl: './signIn.component.html',
@@ -26,16 +27,9 @@ export class SignInComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.initializeModalListener();
-  }
+    const elem = document.getElementById('new-user-modal');
 
-
-  initializeModalListener(): void {
-    document.addEventListener('DOMContentLoaded', () => {
-      const elem = document.querySelector('.modal');
-
-      M.Modal.init(elem);
-    });
+    M.Modal.init(elem);
   }
 
   loginOnApplication(): void {
@@ -43,6 +37,7 @@ export class SignInComponent implements OnInit {
 
     this.authService.login(loginInformation).subscribe(response => {
       sessionStorage.setItem("userToken", response.token);
+
       this.router.navigate(['/home']);
     }, () => {
       this.toaster.error("Por favor, verifique suas credenciais!", "Login incorreto!")
@@ -55,8 +50,13 @@ export class SignInComponent implements OnInit {
   }
 
 
-  goToUserProfile(event: string) {
-    this.router.navigate([`user/profile/${event}`])
+  goToHome(event: string) {
+
+    const elem = document.querySelector('.modal');
+
+    M.Modal.getInstance(elem).close();
+
+    this.router.navigate(['/home']);
   }
 
 }

@@ -4,30 +4,6 @@ agm-map {
   max-width:100%;
 }
 
-.place-icon {
-  width: 20px;
-  margin-right: 8px;
-}
-
-.place-label {
-  margin-right: 10px;
-}
-
-.rating-label {
-  padding-top: 10px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-
-.vicinity-label {
-  font-size: 15px;
-}
-
-
-.place {
-  margin-bottom: 40px;
-}
 
 .nearby-places {
   background: white;
@@ -37,6 +13,10 @@ agm-map {
 
 h3 {
   margin: 0;
+}
+
+.nearby-places-header {
+  margin-bottom: 20px;
 }
 
 

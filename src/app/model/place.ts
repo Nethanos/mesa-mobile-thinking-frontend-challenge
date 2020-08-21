@@ -3,4 +3,5 @@ export interface Place {
     icon: string,
     name: string,
     vicinity: string
+
 }

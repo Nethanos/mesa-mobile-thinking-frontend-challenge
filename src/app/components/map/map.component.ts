@@ -37,8 +37,6 @@ export class MapComponent implements OnInit {
 
     this.googleMap = event;
 
-    console.log(this.googleMap);
-
     const service = new google.maps.places.PlacesService(this.googleMap);
 
     navigator.geolocation.getCurrentPosition((response) => {

@@ -22,21 +22,18 @@
                 <button type="submit" [disabled]="!loginForm.valid"
                     class="waves-effect waves-light btn-large login-button">Entrar</button>
 
-                <a class="waves-effect waves-light btn-large  teal darken-4 modal-trigger" href="#new-user-modal">Criar
+                <a class="waves-effect waves-light btn-large teal darken-4 modal-trigger" href="#new-user-modal">Criar
                     nova
                     conta</a>
             </div>
 
         </form>
     </div>
-    <div class="row container center-align form-content">
-
-    </div>
 
     <div id="new-user-modal" class="modal">
         <div class="modal-content">
-            <app-new-user (onSuccessFullRegistration)="goToUserProfile($event)"
-                (onSignupError)="displaySignupError($event)"></app-new-user>
+            <app-new-user (onSuccessFullRegistration)="goToHome($event)" (onSignupError)="displaySignupError($event)">
+            </app-new-user>
 
         </div>
         <div class="modal-footer">

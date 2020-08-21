@@ -1,0 +1,42 @@
+<div class="row">
+
+    <div class="col s12">
+        <span>
+            <img class="place-icon" [src]="place.icon" alt="icon">
+            <label class="place-label">{{place.name}}</label>
+            <span (click)="enableCommentModal()" class="material-icons comment-icon">
+                notes
+            </span>
+        </span>
+    </div>
+    <div class="col s12">
+        <label class="vicinity-label">{{place.vicinity}}</label>
+    </div>
+
+</div>
+
+
+
+<div [id]="generateModalIdentifier()" class="modal">
+    <div class="modal-content">
+        <h4>Tell us what you think about about {{place.name}}</h4>
+
+        <div class="row">
+            <div class="col s12">
+                <input (keypress)="isTextFinalized($event)" class="input-field" placeholder="Press enter to Confirm! ">
+            </div>
+            <div class="col s12 rating-section">
+                <app-rating></app-rating>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn">
+            Done
+        </button>
+    </div>
+</div>
+
+<!-- <app-comment-section></app-comment-section> -->

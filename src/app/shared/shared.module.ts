@@ -5,19 +5,18 @@ import { environment } from '../../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import { NavbarComponent } from './../components/navbar/navbar.component';
 import { RatingComponent } from './../components/rating/rating.component';
+import { PlaceSectionComponent } from '../components/place-section/place-section.component';
+import { CommentSectionComponent } from '../components/comment-section/comment-section.component';
 
-
-
-
-
+const Components = [MapComponent, NavbarComponent, RatingComponent, PlaceSectionComponent, CommentSectionComponent]
 @NgModule({
-  declarations: [MapComponent, NavbarComponent, RatingComponent],
+  declarations: Components,
   imports: [
     CommonModule,
     AgmCoreModule.forRoot({
       apiKey: environment.placesApi
     }),
   ],
-  exports: [MapComponent, NavbarComponent]
+  exports: Components
 })
 export class SharedModule { }

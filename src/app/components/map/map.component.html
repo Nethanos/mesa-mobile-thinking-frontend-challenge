@@ -6,22 +6,13 @@
 
 <div class="nearby-places">
     <div>
-        <div class="center-align">
+        <div class="center-align nearby-places-header">
             <header>
                 <h3>Nearby places</h3>
             </header>
         </div>
         <div *ngFor="let place of nearbyPlaceList" class="container left-align place">
-            <div class="col s12">
-                <span>
-                    <img class="place-icon" [src]="place.icon" alt="icon">
-                    <label class="place-label">{{place.name}}</label>
-                    <app-rating></app-rating>
-                </span>
-            </div>
-            <div class="col s12">
-                <label class="vicinity-label">{{place.vicinity}}</label>
-            </div>
+            <app-place-section [place]="place"></app-place-section>
 
         </div>
 

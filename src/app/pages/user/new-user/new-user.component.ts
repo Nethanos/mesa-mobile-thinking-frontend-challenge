@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { User } from '../../../model/user';
 import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-new-user',
@@ -10,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class NewUserComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private userService: UserService) { }
 
   @Output() onSignupError = new EventEmitter<string>();
 
@@ -34,7 +35,10 @@ export class NewUserComponent implements OnInit {
 
     this.authService.signUp(newUser).subscribe((response) => {
       if (response.id) {
-        this.onSuccessFullRegistration.emit(response.id);
+        this.userService.retrieve(response.id).subscribe(user => {
+          localStorage.setItem("user", user);
+          this.onSuccessFullRegistration.emit(response.id);
+        })
       }
     },
       (error) => {

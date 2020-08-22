@@ -26,10 +26,17 @@ export class LocalStorageManager {
     private _FAVORITE_PLACE_LIST_KEY = "favoritePlaceListKey"
 
 
-    saveUserToken(token: string) {
+    getUserToken(): string {
+        return localStorage.getItem(this._USER_TOKEN_KEY);
+    }
+
+    saveUserToken(token: string): void {
         localStorage.setItem(this._USER_TOKEN_KEY, token);
     }
 
+    saveUser(user: User) {
+        localStorage.setItem(this._USER_KEY, JSON.stringify(user));
+    }
 
     registryUserEvaluation(placeUserEvaluation: PlaceUserEvaluation): void {
         this._userEvaluationList = this.getEvaluationList();

@@ -16,9 +16,9 @@ const Components = [UserFormComponent, NewUserComponent, UserProfileComponent]
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
     UserRoutingModule,
-    SharedModule
   ],
   exports: Components
 })

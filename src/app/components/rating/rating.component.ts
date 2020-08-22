@@ -32,6 +32,7 @@ export class RatingComponent implements OnInit {
     }
   }
 
+
   displayStarStatus(star: StarRating) {
     return star.starred ? 'star_rate' : 'star_border';
   }

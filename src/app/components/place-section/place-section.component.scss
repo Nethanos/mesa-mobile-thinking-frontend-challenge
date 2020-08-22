@@ -25,6 +25,22 @@
     margin-bottom: 40px;
   }
 
-  .comment-icon {
-    cursor: pointer;
+
+  .place-section{
+    margin-bottom: 10px;
   }
+
+  .commentary-content{
+    margin-top: 10px;
+  }
+
+
+  .comment-icon, .favorite-icon {
+    cursor: pointer ;
+  }
+
+  .favorite-icon {
+    color: red;
+  }
+
+  

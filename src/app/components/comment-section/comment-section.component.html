@@ -1,10 +1,12 @@
-<div class="user-evaluation">
+<div class="col s12 user-evaluation" *ngIf="placeUserEvaluation">
 
-    <div class="col s8">
+    <div class="commentary-section">
         <span>
-            <img alt="Logo do usuário">
-            <label class="commentary-section"> comentários feitos pelo usuário</label>
-            <app-rating></app-rating>
+            <img class="user-comment-avatar" [src]="placeUserEvaluation.user.avatar" alt="Logo do usuário">
         </span>
+        <label class="commentary-label"> {{placeUserEvaluation.commentary}}</label>
     </div>
+
+
+
 </div>

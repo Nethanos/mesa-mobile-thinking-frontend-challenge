@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import * as M from 'materialize-css';
 import { Router } from '@angular/router';
 import { Modal } from 'materialize-css';
+import { LocalStorageManager } from '../../middlewares/local-storage-manager';
 @Component({
   selector: 'app-signIn',
   templateUrl: './signIn.component.html',
@@ -15,7 +16,7 @@ import { Modal } from 'materialize-css';
 export class SignInComponent implements OnInit {
 
   constructor(private authService: AuthService, private toaster: ToastrService, private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router, private localStorageManager: LocalStorageManager) {
   }
 
   modalInstance: any;
@@ -36,9 +37,10 @@ export class SignInComponent implements OnInit {
     const loginInformation = { ...this.loginForm.value } as LoginInformation;
 
     this.authService.login(loginInformation).subscribe(response => {
-      sessionStorage.setItem("userToken", response.token);
 
+      this.localStorageManager.saveUserToken(response.token)
       this.router.navigate(['/home']);
+
     }, () => {
       this.toaster.error("Por favor, verifique suas credenciais!", "Login incorreto!")
     })

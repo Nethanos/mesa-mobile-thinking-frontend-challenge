@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { PlaceUserEvaluation } from '../model/place-user-evaluation';
+import { LocalStorageManager } from '../middlewares/local-storage-manager';
 
 
 @Injectable({
@@ -33,5 +35,4 @@ export class PlacesService {
             console.log(response);
         })
     }
-
 }

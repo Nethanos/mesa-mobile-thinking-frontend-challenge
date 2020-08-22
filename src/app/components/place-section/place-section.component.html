@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row place-section" *ngIf="place">
 
     <div class="col s12">
         <span>
@@ -9,9 +9,23 @@
             </span>
         </span>
     </div>
-    <div class="col s12">
+    <div class="col s8">
         <label class="vicinity-label">{{place.vicinity}}</label>
     </div>
+
+    <div class="col s2">
+
+        <span (click)="handleFavoriteAction()" class="material-icons favorite-icon">{{getFavoriteIcon()}}</span>
+    </div>
+
+
+    <div *ngIf="placeEvaluationList">
+        <div class="col s12 commentary-content" *ngFor="let placeEvaluation of placeEvaluationList">
+            <app-comment-section [placeUserEvaluation]="placeEvaluation"></app-comment-section>
+
+        </div>
+    </div>
+
 
 </div>
 
@@ -23,17 +37,19 @@
 
         <div class="row">
             <div class="col s12">
-                <input (keypress)="isTextFinalized($event)" class="input-field" placeholder="Press enter to Confirm! ">
+                <input [(ngModel)]="newPlaceUserEvaluation.commentary" class="input-field"
+                    placeholder="Press enter to Confirm!">
             </div>
+
             <div class="col s12 rating-section">
-                <app-rating></app-rating>
+                <app-rating (onVote)="registerRatingVote($event)"></app-rating>
             </div>
         </div>
 
 
     </div>
     <div class="modal-footer">
-        <button class="btn">
+        <button (click)="finishCommentary()" class="btn">
             Done
         </button>
     </div>

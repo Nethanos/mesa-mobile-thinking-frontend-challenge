@@ -1,5 +1,7 @@
+import { User } from './user';
+
 export interface PlaceUserEvaluation {
-    userId: string;
+    user: User;
     rating: number;
     commentary: string;
     placeId: string;

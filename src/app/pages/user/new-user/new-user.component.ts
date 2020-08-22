@@ -35,8 +35,8 @@ export class NewUserComponent implements OnInit {
 
     this.authService.signUp(newUser).subscribe((response) => {
       if (response.id) {
-        this.userService.retrieve(response.id).subscribe(user => {
-          localStorage.setItem("user", user);
+        this.userService.retrieve(response.id).subscribe(response => {
+          localStorage.setItem("user", JSON.stringify(response.data));
           this.onSuccessFullRegistration.emit(response.id);
         })
       }

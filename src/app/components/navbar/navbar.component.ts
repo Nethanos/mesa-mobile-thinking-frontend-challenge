@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageManager } from '../../middlewares/local-storage-manager';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private localStorageManager: LocalStorageManager) { }
 
   ngOnInit(): void {
+  }
+
+
+  goToProfile() {
+    const user = this.localStorageManager.getUser();
+
+    return [`/profile/${user.id}`]
   }
 
 }

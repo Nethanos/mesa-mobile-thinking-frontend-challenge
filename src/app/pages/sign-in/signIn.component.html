@@ -32,7 +32,8 @@
 
     <div id="new-user-modal" class="modal">
         <div class="modal-content">
-            <app-new-user (onSuccessFullRegistration)="goToHome($event)" (onSignupError)="displaySignupError($event)">
+            <app-new-user (onSuccessFullRegistration)="displaySuccessFullRegistration($event)"
+                (onSignupError)="displaySignupError($event)">
             </app-new-user>
 
         </div>

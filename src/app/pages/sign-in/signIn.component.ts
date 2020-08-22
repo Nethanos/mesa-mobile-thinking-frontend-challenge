@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import * as M from 'materialize-css';
 import { Router } from '@angular/router';
-import { Modal } from 'materialize-css';
 import { LocalStorageManager } from '../../middlewares/local-storage-manager';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-signIn',
   templateUrl: './signIn.component.html',
@@ -16,10 +16,12 @@ import { LocalStorageManager } from '../../middlewares/local-storage-manager';
 export class SignInComponent implements OnInit {
 
   constructor(private authService: AuthService, private toaster: ToastrService, private formBuilder: FormBuilder,
-    private router: Router, private localStorageManager: LocalStorageManager) {
+    private router: Router, private localStorageManager: LocalStorageManager, private userService: UserService) {
   }
 
   modalInstance: any;
+
+  private _mockedLogin: string;
 
 
   loginForm = this.formBuilder.group({
@@ -33,17 +35,16 @@ export class SignInComponent implements OnInit {
     M.Modal.init(elem);
   }
 
-  loginOnApplication(): void {
+  async loginOnApplication(): Promise<void> {
     const loginInformation = { ...this.loginForm.value } as LoginInformation;
 
-    this.authService.login(loginInformation).subscribe(response => {
+    const apiLoginResponse = await this.authService.login(loginInformation).toPromise();
 
-      this.localStorageManager.saveUserToken(response.token)
-      this.router.navigate(['/home']);
+    this.saveUserToken(apiLoginResponse);
 
-    }, () => {
-      this.toaster.error("Por favor, verifique suas credenciais!", "Login incorreto!")
-    })
+    this.saveUserInfo();
+
+    this.router.navigate(['/map'])
   }
 
 
@@ -51,14 +52,31 @@ export class SignInComponent implements OnInit {
     this.toaster.error(errorMessage, "Erro ao tentar registro!");
   }
 
+  saveUserToken(apiResponse: any): void {
+    if (apiResponse.token) {
+      this.localStorageManager.saveUserToken(apiResponse.token);
+      return;
+    }
+    this.toaster.error("Por favor, verifique suas credenciais!", "Login incorreto!")
+  }
 
-  goToHome(event: string) {
+  async saveUserInfo(): Promise<void> {
+    const userInfo = await this.userService.retrieve(this._mockedLogin || '1').toPromise();
+    this.localStorageManager.saveUser(userInfo.data);
+  }
+
+
+  displaySuccessFullRegistration(id: string) {
+
+    this._mockedLogin = id.toString();
+
+    console.log(id);
 
     const elem = document.querySelector('.modal');
 
     M.Modal.getInstance(elem).close();
 
-    this.router.navigate(['/home']);
+    this.toaster.success('Use your login information to enter the application!', 'Successfull registered!')
   }
 
 }

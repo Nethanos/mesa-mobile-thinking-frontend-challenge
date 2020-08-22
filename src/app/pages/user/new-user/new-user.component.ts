@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { User } from '../../../model/user';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
+import { LocalStorageManager } from '../../../middlewares/local-storage-manager';
 
 @Component({
   selector: 'app-new-user',
@@ -11,7 +12,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class NewUserComponent implements OnInit {
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService, private userService: UserService, private localStorageManager: LocalStorageManager) { }
 
   @Output() onSignupError = new EventEmitter<string>();
 
@@ -35,14 +36,10 @@ export class NewUserComponent implements OnInit {
 
     this.authService.signUp(newUser).subscribe((response) => {
       if (response.id) {
-        this.userService.retrieve(response.id).subscribe(response => {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          this.onSuccessFullRegistration.emit(response.id);
-        })
+        this.onSuccessFullRegistration.emit(response.id);
       }
     },
       (error) => {
-        console.error(error);
         this.onSignupError.emit("Houve um problema com seu registro, por favor, verifique seus dados!");
       });
 

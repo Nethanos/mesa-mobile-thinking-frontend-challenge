@@ -4,19 +4,18 @@
         <span>
             <img class="place-icon" [src]="place.icon" alt="icon">
             <label class="place-label">{{place.name}}</label>
+            <span (click)="handleFavoriteAction()" class="material-icons favorite-icon">{{getFavoriteIcon()}}</span>
+
             <span (click)="enableCommentModal()" class="material-icons comment-icon">
                 notes
             </span>
+
         </span>
     </div>
-    <div class="col s8">
+    <div class="col s12">
         <label class="vicinity-label">{{place.vicinity}}</label>
     </div>
 
-    <div class="col s2">
-
-        <span (click)="handleFavoriteAction()" class="material-icons favorite-icon">{{getFavoriteIcon()}}</span>
-    </div>
 
 
     <div *ngIf="placeEvaluationList">

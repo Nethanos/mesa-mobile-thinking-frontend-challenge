@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, AfterContentInit } from '@angular/core';
 import { Place } from '../../model/place';
 import { PlaceUserEvaluation } from '../../model/place-user-evaluation';
 import { LocalStorageManager } from '../../middlewares/local-storage-manager';
@@ -8,17 +8,44 @@ import { LocalStorageManager } from '../../middlewares/local-storage-manager';
   templateUrl: './place-section.component.html',
   styleUrls: ['./place-section.component.scss']
 })
-export class PlaceSectionComponent implements OnInit, AfterViewInit {
+export class PlaceSectionComponent implements OnInit, AfterContentInit {
 
   constructor(private localStorageManager: LocalStorageManager) { }
 
+  @Input() place: Place
 
   placeEvaluationList: Array<PlaceUserEvaluation>;
+
+  commentModalIdentifier: string;
+
+  commentModal: M.Modal;
+
+  newPlaceUserEvaluation = {} as PlaceUserEvaluation;
+
+  isCommentFieldEnabled: boolean;
 
 
   ngOnInit(): void {
     this.placeEvaluationList = this.getPlaceEvaluationList();
 
+  }
+
+  ngAfterContentInit(): void {
+    this.loadCommentModal();
+  }
+
+  loadCommentModal(): M.Modal {
+    this.commentModalIdentifier = this.generateCommentModalIdentifier()
+    const elem = document.getElementById(this.commentModalIdentifier);
+    this.commentModal = M.Modal.init(elem);
+    return this.commentModal;
+  }
+
+  private _getCommentModal(): M.Modal {
+    if (this.commentModal) {
+      return this.commentModal;
+    }
+    return this.loadCommentModal();
   }
 
   isFavoritePlace(): boolean {
@@ -33,32 +60,17 @@ export class PlaceSectionComponent implements OnInit, AfterViewInit {
     return placeEvaluationList;
   }
 
-  newPlaceUserEvaluation = {} as PlaceUserEvaluation;
-
-
-  ngAfterViewInit(): void {
-    const elem = document.getElementById(this.generateModalIdentifier());
-    M.Modal.init(elem);
-  }
-
-  isCommentFieldEnabled: boolean;
-
-  modalIdentifier = Math.round(Math.random()).toString();
-
-  @Input() place: Place
-
-  enableCommentModal() {
-    const elem = document.getElementById(this.generateModalIdentifier());
-    M.Modal.getInstance(elem).open();
+  enableCommentModal(): void {
+    this._getCommentModal().open();
   }
 
 
-  registerRatingVote(event: any) {
+  registerRatingVote(event: any): void {
     this.newPlaceUserEvaluation.rating = event;
 
   }
 
-  generateModalIdentifier() {
+  generateCommentModalIdentifier() {
     const normalizedPlaceName = this.place.name.trim().replace(/\s/g, "-");
     return normalizedPlaceName.toLocaleLowerCase().concat("-comment-modal");
   }
@@ -66,14 +78,10 @@ export class PlaceSectionComponent implements OnInit, AfterViewInit {
   finishCommentary() {
     this.newPlaceUserEvaluation.user = this.localStorageManager.getUser();
     this.newPlaceUserEvaluation.placeId = this.place.place_id;
-
-
     this.placeEvaluationList.push(this.newPlaceUserEvaluation);
     this.localStorageManager.registryUserEvaluation(this.newPlaceUserEvaluation);
 
-    const elem = document.getElementById(this.generateModalIdentifier());
-
-    M.Modal.getInstance(elem).close();
+    this._getCommentModal().close();
 
   }
 

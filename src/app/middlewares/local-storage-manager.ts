@@ -98,7 +98,7 @@ export class LocalStorageManager {
 
     }
 
-    favoritePlace(place: Place) {
+    favoritePlace(place: Place): void {
         const userId = this.getUser().id;
 
         const favoriteUserPlaceList = this._setPlaceToFavorites(place, userId);
@@ -110,7 +110,7 @@ export class LocalStorageManager {
         localStorage.setItem(this._FAVORITE_PLACE_LIST_KEY, JSON.stringify(allUserFavoriteList));
     }
 
-    unfavoritePlace(placeToBeUnfavorited: Place) {
+    unfavoritePlace(placeToBeUnfavorited: Place): void {
         const userId = this.getUser().id;
 
         const favoriteUserList = this.getFavoriteUserList(userId);
@@ -135,7 +135,7 @@ export class LocalStorageManager {
         return this._userEvaluationList;
     }
 
-    updateUserEvaluationList() {
+    updateUserEvaluationList(): void {
         localStorage.setItem(this._USER_EVALUATION_LIST_KEY, JSON.stringify(this._userEvaluationList));
     }
 
@@ -144,17 +144,17 @@ export class LocalStorageManager {
         return JSON.parse(localStorage.getItem(this._USER_KEY));
     }
 
-    isPlaceFavorite(placeToBeChecked: Place) {
-        const favoritePlaceUser = this.getFavoriteUserList(this.getUser().id);
-
-        return favoritePlaceUser.placeList.some(place => place.place_id === placeToBeChecked.place_id);
+    isPlaceFavorite(placeToBeChecked: Place): boolean {
+        if (this.getUser()) {
+            const favoritePlaceUser = this.getFavoriteUserList(this.getUser().id);
+            return favoritePlaceUser.placeList.some(place => place.place_id === placeToBeChecked.place_id);
+        }
     }
 
     private _setPlaceToFavorites(place: Place, userId: string): FavoriteUserPlaceList {
         const favoriteUserPlaceList: FavoriteUserPlaceList = this.getFavoriteUserList(userId);
 
         favoriteUserPlaceList.placeList.push(place);
-
         return favoriteUserPlaceList;
     }
 

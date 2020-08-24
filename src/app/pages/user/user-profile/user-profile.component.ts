@@ -20,10 +20,6 @@ export class UserProfileComponent implements OnInit {
 
   user: User;
 
-  isViewingUser = true;
-
-  isEditingUser = !this.isViewingUser;
-
   editUserModal: M.Modal;
 
   logoutModal: M.Modal;
@@ -36,36 +32,38 @@ export class UserProfileComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
-    const editModal = document.getElementById('edit-user-modal');
-    const logoutModal = document.getElementById('logout-modal');
 
-
-    this.editUserModal = M.Modal.init(editModal);
-    this.logoutModal = M.Modal.init(logoutModal);
-
+    this.loadEditModal();
+    this.loadLogoutModal();
     this.user = await this.retrieveUserFromApi();
-    console.log(this.user);
-
 
   }
 
+  loadEditModal(): void {
+    const editModal = document.getElementById('edit-user-modal');
+    this.editUserModal = M.Modal.init(editModal);
+
+  }
+
+  loadLogoutModal(): void {
+    const logoutModal = document.getElementById('logout-modal');
+    this.logoutModal = M.Modal.init(logoutModal);
+  }
+
   async retrieveUserFromApi(): Promise<User> {
-
     const id: string = this.activeRoute.snapshot.params['id'];
-
     try {
       const apiUserResponse = await this.userService.retrieve(id).toPromise();
-
       if (apiUserResponse.data) {
         return apiUserResponse.data;
       }
     } catch (exception) {
       this.router.navigate(['']);
-
     }
   }
 
-  updateUser() {
+
+  updateUser(): void {
     const userToBeUpdated = {
       id: this.user.id,
       ...this.editUserForm.value
@@ -81,7 +79,7 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  logoutApplication() {
+  logoutApplication(): void {
     this.authService.logout();
     this.logoutModal.close();
 

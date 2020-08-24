@@ -19,8 +19,6 @@ export class SignInComponent implements OnInit {
     private router: Router, private localStorageManager: LocalStorageManager, private userService: UserService) {
   }
 
-  modalInstance: any;
-
   private _mockedLogin: string;
 
 
@@ -49,7 +47,7 @@ export class SignInComponent implements OnInit {
 
 
   displaySignupError(errorMessage: string): void {
-    this.toaster.error(errorMessage, "Erro ao tentar registro!");
+    this.toaster.error(errorMessage, "Error on registration!");
   }
 
   saveUserToken(apiResponse: any): void {
@@ -57,7 +55,7 @@ export class SignInComponent implements OnInit {
       this.localStorageManager.saveUserToken(apiResponse.token);
       return;
     }
-    this.toaster.error("Por favor, verifique suas credenciais!", "Login incorreto!")
+    this.toaster.error("Please, check your credentials", "Failed to log in!")
   }
 
   async saveUserInfo(): Promise<void> {

@@ -30,7 +30,7 @@
 
 
 
-<div [id]="generateModalIdentifier()" class="modal">
+<div *ngIf="commentModalIdentifier" [id]="commentModalIdentifier" class="modal">
     <div class="modal-content">
         <h4>Tell us what you think about about {{place.name}}</h4>
 
@@ -45,7 +45,6 @@
             </div>
         </div>
 
-
     </div>
     <div class="modal-footer">
         <button (click)="finishCommentary()" class="btn">
@@ -53,5 +52,3 @@
         </button>
     </div>
 </div>
-
-<!-- <app-comment-section></app-comment-section> -->

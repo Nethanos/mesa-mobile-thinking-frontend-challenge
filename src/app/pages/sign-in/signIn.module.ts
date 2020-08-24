@@ -5,10 +5,6 @@ import { SignInComponent } from './signIn.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastContainerModule } from 'ngx-toastr';
 
-
-
-
-
 @NgModule({
   declarations: [SignInComponent],
   imports: [

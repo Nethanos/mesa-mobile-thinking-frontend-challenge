@@ -19,7 +19,6 @@ export class AuthGuardService implements CanActivate {
     }
 
     isAuthenticated(): boolean {
-        console.log(!!this.localStorageManagar.getUserToken());
         return !!this.localStorageManagar.getUserToken();
     }
 }

@@ -10,9 +10,9 @@ import { LocalStorageManager } from '../../../middlewares/local-storage-manager'
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.scss']
 })
-export class NewUserComponent implements OnInit {
+export class NewUserComponent {
 
-  constructor(private authService: AuthService, private userService: UserService, private localStorageManager: LocalStorageManager) { }
+  constructor(private authService: AuthService) { }
 
   @Output() onSignupError = new EventEmitter<string>();
 
@@ -27,11 +27,7 @@ export class NewUserComponent implements OnInit {
     }
   )
 
-  ngOnInit(): void {
-  }
-
-
-  signUp() {
+  signUp(): void {
     const newUser = { ...this.signUpForm.value } as User;
 
     this.authService.signUp(newUser).subscribe((response) => {
@@ -39,10 +35,10 @@ export class NewUserComponent implements OnInit {
         this.onSuccessFullRegistration.emit(response.id);
       }
     },
-      (error) => {
-        this.onSignupError.emit("Houve um problema com seu registro, por favor, verifique seus dados!");
-      });
+      () => {
+        this.onSignupError.emit("There was a problem with your registration, please, Check your data!");
 
+      }
+    );
   }
-
 }

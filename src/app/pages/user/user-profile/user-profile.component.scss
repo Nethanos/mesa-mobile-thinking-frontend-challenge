@@ -1,32 +1,42 @@
-.info-label {
-    cursor: pointer;
-    color: #004d40;
-    opacity: 0.6;
-    transition: 0.3s;
-}
-.user-info {
-    font-size: 1.8rem;
-}
-
 .profile-content {
     background: white;
-
+    height:100vh;
+   
 }
 
-.profile-card {
-    margin:20%
+.avatar-info {
+    padding-top: 30px;
+
+}
+p {
+    margin-top: 0
+    
 }
 
-img {
-    border-radius: 50%;
-}
-
-.create-icon {
-    color: #004d40;
-    opacity: 0.6;
+.profile-icon {
+    color: darkslategray;
+    font-size: 30px;
+    cursor: pointer;
     transition: 0.3s;
 }
 
-.create-icon:hover {
-    color: #26a69a;
+.icon-area {
+    margin-top: 15px;
 }
+
+.profile-icon:hover {
+    color: darkgray;
+    cursor: pointer;
+}
+
+
+.user-avatar {
+    border-radius: 50%;
+    width: 150px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .user-avatar {
+        width: 80px;    }
+  }

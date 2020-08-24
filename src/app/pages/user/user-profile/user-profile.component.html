@@ -1,52 +1,72 @@
 <app-navbar></app-navbar>
-<div class="row">
+<div class="profile-content">
+    <div class="row container left-align" *ngIf="user">
+        <div class=" avatar-info col s10">
+            <span>
+                <img class="user-avatar" [src]="user.avatar" alt="User">
+            </span>
 
-    <div class="col s6">
-        <div class="col s6 profile-content" *ngIf="user">
-            <div class="profile-card">
-                <div *ngIf="isViewingUser" class="user-view">
-                    <div class="col s6">
-                        <img [src]="user.avatar">
-                    </div>
-                    <div class="col s6">
-                        <p class="user-info">{{user.first_name}} {{user.last_name}}</p>
-                        <p class="user-info">{{user.email}}</p>
-                    </div>
-                </div>
-
-                <div *ngIf="isEditingUser" class="user-edit">
-                    <h4>Alterar informações</h4>
-                    <form class="col s12" [formGroup]="editUserForm" (ngSubmit)="updateUser()">
-                        <div class="row">
-
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="first_name" type="text" formControlName="first_name" class="validate">
-                                <label for="first_name">Primeiro Nome</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="last_name" type="text" formControlName="last_name" class="validate">
-                                <label for="last_name">Sobrenome</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <button type="submit" class="btn-large btn-waves">Salvar
-                                    Alterações</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-
-                <label (click)="enableUserEdition()" class="info-label">Informações <i
-                        class="material-icons create-icon">create</i></label>
+            <div class="profile-info">
+                <p>
+                    <label>{{user.first_name}} {{user.last_name}}</label>
+                </p>
+                <p>
+                    <label>{{user.email}}</label>
+                </p>
             </div>
+        </div>
+        <div class="col s2 right-align icon-area">
+            <a class="modal-trigger" href="#edit-user-modal">
+                <span class="profile-icon material-icons">
+                    create
+                </span>
+            </a>
+
+            <a class="modal-trigger" href="#logout-modal">
+                <span class="profile-icon material-icons">
+                    login
+                </span>
+
+            </a>
+
         </div>
     </div>
 
+    <div id="edit-user-modal" class="modal">
+        <div class="modal-content">
+            <h4>
+                Editar informações
+
+            </h4>
+            <form class="col s12" [formGroup]="editUserForm" (ngSubmit)="updateUser()">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="first_name" type="text" formControlName="first_name" class="validate">
+                        <label for="first_name">First name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="last_name" type="text" formControlName="last_name" class="validate">
+                        <label for="last_name">Last name</label>
+
+                    </div>
+                </div>
+                <button type="submit" class="btn">Salvar alterações</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <h4>
+                Do you want to logout?
+            </h4>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" (click)="logoutApplication()">Yes</button>
+        </div>
+    </div>
 </div>

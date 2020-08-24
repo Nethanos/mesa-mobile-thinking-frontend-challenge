@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../model/user';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -13,13 +15,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class UserProfileComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, private userService: UserService,
-    private router: Router, private formBuilder: FormBuilder) { }
+    private router: Router, private formBuilder: FormBuilder, private toasterService: ToastrService,
+    private authService: AuthService) { }
 
   user: User;
 
   isViewingUser = true;
 
   isEditingUser = !this.isViewingUser;
+
+  editUserModal: M.Modal;
+
+  logoutModal: M.Modal;
 
 
   editUserForm = this.formBuilder.group({
@@ -29,20 +36,18 @@ export class UserProfileComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
+    const editModal = document.getElementById('edit-user-modal');
+    const logoutModal = document.getElementById('logout-modal');
+
+
+    this.editUserModal = M.Modal.init(editModal);
+    this.logoutModal = M.Modal.init(logoutModal);
 
     this.user = await this.retrieveUserFromApi();
     console.log(this.user);
 
 
   }
-
-  enableUserEdition() {
-    this.isViewingUser = !this.isViewingUser;
-    this.isEditingUser = !this.isEditingUser;
-    this.editUserForm.reset();
-  }
-
-
 
   async retrieveUserFromApi(): Promise<User> {
 
@@ -71,10 +76,17 @@ export class UserProfileComponent implements OnInit {
         ...this.user,
         ...response
       }
-      console.log(this.user);
-      this.enableUserEdition();
+      this.editUserModal.close();
+      this.toasterService.success('As alterações foram salvas com sucesso', 'Operação realizada!')
     });
   }
 
+  logoutApplication() {
+    this.authService.logout();
+    this.logoutModal.close();
+
+    this.router.navigate(['/']);
+
+  }
 
 }

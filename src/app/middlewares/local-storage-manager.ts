@@ -30,12 +30,26 @@ export class LocalStorageManager {
         return localStorage.getItem(this._USER_TOKEN_KEY);
     }
 
+    private _clearUserToken(): void {
+        localStorage.removeItem(this._USER_TOKEN_KEY);
+    }
+
     saveUserToken(token: string): void {
         localStorage.setItem(this._USER_TOKEN_KEY, token);
     }
 
     saveUser(user: User) {
         localStorage.setItem(this._USER_KEY, JSON.stringify(user));
+    }
+
+    private _clearUser(): void {
+        localStorage.removeItem(this._USER_KEY);
+    }
+
+
+    handleLogoutAction(): void {
+        this._clearUser();
+        this._clearUserToken();
     }
 
     registryUserEvaluation(placeUserEvaluation: PlaceUserEvaluation): void {

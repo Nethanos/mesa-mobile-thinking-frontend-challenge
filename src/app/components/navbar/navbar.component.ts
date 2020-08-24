@@ -17,7 +17,10 @@ export class NavbarComponent implements OnInit {
   goToProfile() {
     const user = this.localStorageManager.getUser();
 
-    return [`/profile/${user.id}`]
+    if (user) {
+      return [`/profile/${user.id}`]
+
+    }
   }
 
 }

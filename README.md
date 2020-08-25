@@ -1,27 +1,33 @@
 # MesaMobileFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+Projeto referente ao desafio para a vaga de frontend da Mesa Mobile Thinking
 
-## Development server
+## Tecnologias utilizadas
+- Node 12.x
+- npm 6.x
+- Angular 10
+- Google Maps API
+- Google Places API
+- reqres.in
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+##
+- Para rodar localmente, você vai precisar do node 10+ e o npm 6+.
+- Baixar o repositório do projeto. Na pasta raíz, utilize npm install.
+- Após o npm install, utilize npm start
+- O projeto estará disponível em http://localhost:4201
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Funções implementadas
 
-## Build
+- Login utilizando reqres.in
+- Cadastro utilizando reqres.in
+- View de google map
+- List de google places
+- Favoritar local
+- Registrar comentário de local
+- Edit de profile
+- View de profile
+- Check de conexão com internet ao trocar de rota
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

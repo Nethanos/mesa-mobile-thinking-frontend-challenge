@@ -29,5 +29,6 @@ Projeto referente ao desafio para a vaga de frontend da Mesa Mobile Thinking
 - View de profile
 - Check de conexão com internet ao trocar de rota
 
-
+## Disponível em
+https://nethanos.github.io/mesa-mobile-thinking-frontend-challenge/mesa-mobile-thinking-frontend-challenge/
 
